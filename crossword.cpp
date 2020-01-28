@@ -2,7 +2,7 @@
 #include <vector>
 using namespace std;
 
-bool canplaceH(vector<string> &c, int x, int y, string w)
+bool canplaceH(vector<vector<char>> &c, int x, int y, string w)
 {
     // if (x >= c.size() || (y + w.size() - 1) >= c[0].size())
     //     return false;
@@ -14,7 +14,7 @@ bool canplaceH(vector<string> &c, int x, int y, string w)
     return true;
 }
 
-bool canplaceV(vector<string> &c, int x, int y, string w)
+bool canplaceV(vector<vector<char>> &c, int x, int y, string w)
 {
     // if (y >= c[0].size() || (x + w.size() - 1) >= c.size())
     //     return false;
@@ -25,7 +25,7 @@ bool canplaceV(vector<string> &c, int x, int y, string w)
     }
     return true;
 }
-vector<bool> placeH(vector<string> &c, int x, int y, string w)
+vector<bool> placeH(vector<vector<char>> &c, int x, int y, string w)
 {
     vector<bool> v(w.size(), false);
     for (int j = 0; j < w.size(); j++)
@@ -38,7 +38,7 @@ vector<bool> placeH(vector<string> &c, int x, int y, string w)
     }
     return v;
 }
-vector<bool> placeV(vector<string> &c, int x, int y, string w)
+vector<bool> placeV(vector<vector<char>> &c, int x, int y, string w)
 {
     vector<bool> v(w.size(), false);
     for (int i = 0; i < w.size(); i++)
@@ -51,26 +51,30 @@ vector<bool> placeV(vector<string> &c, int x, int y, string w)
     }
     return v;
 }
-void unplaceH(vector<string> &c, int x, int y, vector<bool> v)
+void unplaceH(vector<vector<char>> &c, int x, int y, vector<bool> v)
 {
     for (int j = 0; j < v.size(); j++)
         if (v[j])
             c[x][y + j] = '-';
 }
-void unplaceV(vector<string> &c, int x, int y, vector<bool> v)
+void unplaceV(vector<vector<char>> &c, int x, int y, vector<bool> v)
 {
     for (int j = 0; j < v.size(); j++)
         if (v[j])
             c[x + j][y] = '-';
 }
 // vector<string> aa;
-void cross(vector<string> &c, vector<string> &w, int indx)
+void cross(vector<vector<char>> &c, vector<string> &w, int indx)
 {
     if (indx == (w.size()))
     {
         for (auto i : c)
         {
-            cout << i << endl;
+            for (auto j : i)
+            {
+                cout << j << " ";
+            }
+            cout << endl;
         }
         return;
     }
@@ -99,7 +103,7 @@ void cross(vector<string> &c, vector<string> &w, int indx)
     }
 }
 
-void crosswordPuzzle(vector<string> crossword, string words)
+void crosswordPuzzle(vector<vector<char>> crossword, string words)
 {
     vector<string> w;
     string a = "";
@@ -122,16 +126,16 @@ void crosswordPuzzle(vector<string> crossword, string words)
 int main()
 {
     // wordbreak("ilikeicecreamandmango", "");
-    vector<string> c = {"+-++++++++",
-                        "+-++++++++",
-                        "+-++++++++",
-                        "+-----++++",
-                        "+-+++-++++",
-                        "+-+++-++++",
-                        "+++++-++++",
-                        "++------++",
-                        "+++++-++++",
-                        "+++++-++++"};
+    vector<vector<char>> c = {{'+', '-', '+', '+', '+', '+', '+', '+', '+', '+'},
+                              {'+', '-', '+', '+', '+', '+', '+', '+', '+', '+'},
+                              {'+', '-', '+', '+', '+', '+', '+', '+', '+', '+'},
+                              {'+', '-', '-', '-', '-', '-', '+', '+', '+', '+'},
+                              {'+', '-', '+', '+', '+', '-', '+', '+', '+', '+'},
+                              {'+', '-', '+', '+', '+', '-', '+', '+', '+', '+'},
+                              {'+', '+', '+', '+', '+', '-', '+', '+', '+', '+'},
+                              {'+', '+', '-', '-', '-', '-', '-', '-', '+', '+'},
+                              {'+', '+', '+', '+', '+', '-', '+', '+', '+', '+'},
+                              {'+', '+', '+', '+', '+', '-', '+', '+', '+', '+'}};
     string w = "LONDON;DELHI;ICELAND;ANKARA";
     crosswordPuzzle(c, w);
     return 0;
